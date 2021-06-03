@@ -93,7 +93,6 @@ All sensors are optional.
       name: "Amount of discharged energy"
       id: discharged_energy   
       filters:
-        # Multiplication factor from W to kW is 0.001
         - multiply: 0.001
       unit_of_measurement: kWh
 
