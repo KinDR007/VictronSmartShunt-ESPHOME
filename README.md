@@ -21,7 +21,7 @@ The `uart_id` is optional.
 
 All sensors are optional.
 
-```
+```yaml
   - platform: victron
     battery_voltage:
       name: "Battery Voltage"  
