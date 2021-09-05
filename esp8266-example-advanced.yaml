@@ -3,6 +3,10 @@ esphome:
   platform: ESP8266
   board: d1_mini
 
+external_components:
+  - source: github://KinDR007/VictronSmartShunt-ESPHOME@main
+    refresh: 0s
+
 substitutions:
   lower_devicename: "smartshunt"
   devicename: "SmartShunt_500A"
@@ -128,12 +132,12 @@ sensor:
       accuracy_decimals: ${accuracy}
 
 
-    bmv_alarm:
+    bmv_alarm_text:
       name: "BMV alarm"
       id: bmv_alarm
 
-    bmv_pid:
-      name: "bmv - pid"
+    bmv_text:
+      name: "bmv - text"
       id: bmv_pid
 
     last_full_charge:
