@@ -1,8 +1,9 @@
 import esphome.codegen as cg
 import esphome.config_validation as cv
-from esphome.components import sensor, text_sensor, uart
+from esphome.components import sensor, text_sensor
 from esphome.const import (
     CONF_ID,
+    CONF_BATTERY_VOLTAGE,
     UNIT_VOLT,
     ICON_FLASH,
     UNIT_AMPERE,
@@ -10,7 +11,6 @@ from esphome.const import (
     UNIT_WATT_HOURS,
     ICON_POWER,
     ICON_CURRENT_AC,
-    ICON_COUNTER,
     UNIT_EMPTY,
     ICON_EMPTY,
     DEVICE_CLASS_POWER,
@@ -22,21 +22,21 @@ from esphome.const import (
     ICON_TIMELAPSE,
     UNIT_MINUTE,
 )
-from . import victron_ns, VictronComponent, CONF_VICTRON_ID
+from . import VictronComponent, CONF_VICTRON_ID
 
 
 # sensors SS
 CONF_INSTANTENEOUS_POWER = "instantaneous_power"  # okamžitý výkon
 CONF_TIME_TO_GO = "time_to_go"
 CONF_STATE_OF_CHARGE = "state_of_charge"
-CONF_CONSUMED_AMP_HOUR = "consumed_amp_hours"
+CONF_CONSUMED_AMP_HOURS = "consumed_amp_hours"
 CONF_MIN_BATTERY_VOLTAGE = "min_battery_voltage"
 CONF_MAX_BATTERY_VOLTAGE = "max_battery_voltage"
 CONF_AMOUNT_OF_CHARGED = "amount_of_charged"
-CONF_BMV_ALARM_TEXT = "bmv_alarm"
-CONF_BMV_TEXT = "bmv_pid"
+CONF_BMV_ALARM_TEXT = "bmv_alarm_text"
+CONF_BMV_TEXT = "bmv_text"
 CONF_LAST_FULL_CHARGE = "last_full_charge"
-CONF_DEEPEST_DISCHAGRE = "deepest_discharge"
+CONF_DEEPEST_DISCHARGE = "deepest_discharge"
 CONF_LAST_DISCHARGE = "last_discharge"
 CONF_DISCHARGED_ENERGY = "discharged_energy"
 
@@ -49,7 +49,6 @@ CONF_YIELD_YESTERDAY = "yield_yesterday"
 CONF_YIELD_TODAY = "yield_today"
 CONF_PANEL_VOLTAGE = "panel_voltage"
 CONF_PANEL_POWER = "panel_power"
-CONF_BATTERY_VOLTAGE = "battery_voltage"
 CONF_BATTERY_CURRENT = "battery_current"
 CONF_DAY_NUMBER = "day_number"
 CONF_CHARGER_STATUS = "charger_status"
@@ -133,7 +132,7 @@ CONFIG_SCHEMA = cv.Schema(
         cv.Optional(CONF_STATE_OF_CHARGE): sensor.sensor_schema(
             UNIT_PERCENT, ICON_PERCENT, 0, DEVICE_CLASS_EMPTY
         ),
-        cv.Optional(CONF_CONSUMED_AMP_HOUR): sensor.sensor_schema(
+        cv.Optional(CONF_CONSUMED_AMP_HOURS): sensor.sensor_schema(
             UNIT_AMPERE, ICON_CURRENT_AC, 3, DEVICE_CLASS_POWER
         ),
         cv.Optional(CONF_BMV_ALARM_TEXT): text_sensor.TEXT_SENSOR_SCHEMA.extend(
@@ -154,7 +153,7 @@ CONFIG_SCHEMA = cv.Schema(
         cv.Optional(CONF_LAST_FULL_CHARGE): sensor.sensor_schema(
             UNIT_MINUTE, ICON_TIMELAPSE, 0, DEVICE_CLASS_EMPTY
         ),
-        cv.Optional(CONF_DEEPEST_DISCHAGRE): sensor.sensor_schema(
+        cv.Optional(CONF_DEEPEST_DISCHARGE): sensor.sensor_schema(
             UNIT_AMPERE, ICON_CURRENT_AC, 3, DEVICE_CLASS_CURRENT
         ),
         cv.Optional(CONF_LAST_DISCHARGE): sensor.sensor_schema(
@@ -268,8 +267,8 @@ def to_code(config):
         sens = yield sensor.new_sensor(config[CONF_STATE_OF_CHARGE])
         cg.add(victron.set_state_of_charge_sensor(sens))
 
-    if CONF_CONSUMED_AMP_HOUR in config:
-        sens = yield sensor.new_sensor(config[CONF_CONSUMED_AMP_HOUR])
+    if CONF_CONSUMED_AMP_HOURS in config:
+        sens = yield sensor.new_sensor(config[CONF_CONSUMED_AMP_HOURS])
         cg.add(victron.set_consumed_amp_hours_sensor(sens))
     # **************************** SS***************
     if CONF_BMV_ALARM_TEXT in config:
@@ -300,8 +299,8 @@ def to_code(config):
         sens = yield sensor.new_sensor(config[CONF_LAST_FULL_CHARGE])
         cg.add(victron.set_last_full_charge_sensor(sens))
 
-    if CONF_DEEPEST_DISCHAGRE in config:
-        sens = yield sensor.new_sensor(config[CONF_DEEPEST_DISCHAGRE])
+    if CONF_DEEPEST_DISCHARGE in config:
+        sens = yield sensor.new_sensor(config[CONF_DEEPEST_DISCHARGE])
         cg.add(victron.set_depth_deepest_dis_sensor(sens))
 
     if CONF_LAST_DISCHARGE in config:
