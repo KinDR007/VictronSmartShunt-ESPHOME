@@ -2,28 +2,28 @@ import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.components import sensor, text_sensor
 from esphome.const import (
-    CONF_ID,
     CONF_BATTERY_VOLTAGE,
-    UNIT_VOLT,
+    CONF_ID,
+    DEVICE_CLASS_CURRENT,
+    DEVICE_CLASS_EMPTY,
+    DEVICE_CLASS_POWER,
+    DEVICE_CLASS_VOLTAGE,
+    ICON_CURRENT_AC,
+    ICON_EMPTY,
     ICON_FLASH,
+    ICON_PERCENT,
+    ICON_POWER,
+    ICON_TIMELAPSE,
     UNIT_AMPERE,
+    UNIT_EMPTY,
+    UNIT_MINUTE,
+    UNIT_PERCENT,
+    UNIT_VOLT,
     UNIT_WATT,
     UNIT_WATT_HOURS,
-    ICON_POWER,
-    ICON_CURRENT_AC,
-    UNIT_EMPTY,
-    ICON_EMPTY,
-    DEVICE_CLASS_POWER,
-    DEVICE_CLASS_CURRENT,
-    DEVICE_CLASS_VOLTAGE,
-    DEVICE_CLASS_EMPTY,
-    UNIT_PERCENT,
-    ICON_PERCENT,
-    ICON_TIMELAPSE,
-    UNIT_MINUTE,
 )
-from . import VictronComponent, CONF_VICTRON_ID
 
+from . import CONF_VICTRON_ID, VictronComponent
 
 # sensors SS
 CONF_INSTANTENEOUS_POWER = "instantaneous_power"  # okamžitý výkon
