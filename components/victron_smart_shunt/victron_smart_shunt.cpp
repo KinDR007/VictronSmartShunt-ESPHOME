@@ -1,13 +1,13 @@
-#include "victron.h"
+#include "victron_smart_shunt.h"
 #include "esphome/core/log.h"
 
 namespace esphome {
-namespace victron {
+namespace victron_smart_shunt {
 
-static const char *const TAG = "victron";
+static const char *const TAG = "victron_smart_shunt";
 
-void VictronComponent::dump_config() {
-  ESP_LOGCONFIG(TAG, "Victron:");
+void VictronSmartShuntComponent::dump_config() {
+  ESP_LOGCONFIG(TAG, "VictronSmartShunt:");
   LOG_SENSOR("  ", "Max Power Yesterday", max_power_yesterday_sensor_);
   LOG_SENSOR("  ", "Max Power Today", max_power_today_sensor_);
   LOG_SENSOR("  ", "Yield Total", yield_total_sensor_);
@@ -47,7 +47,7 @@ void VictronComponent::dump_config() {
   check_uart_settings(19200);
 }
 
-void VictronComponent::loop() {
+void VictronSmartShuntComponent::loop() {
   const uint32_t now = millis();
   if ((state_ > 0) && (now - last_transmission_ >= 200)) {
     // last transmission too long ago. Reset RX index.
@@ -357,7 +357,7 @@ static std::string flash_to_string(const __FlashStringHelper *flash) {
   return result;
 }
 
-void VictronComponent::handle_value_() {
+void VictronSmartShuntComponent::handle_value_() {
   int value;
 
   if (label_ == "H9") {
@@ -486,5 +486,5 @@ void VictronComponent::handle_value_() {
   }
 }
 
-}  // namespace victron
+}  // namespace victron_smart_shunt
 }  // namespace esphome

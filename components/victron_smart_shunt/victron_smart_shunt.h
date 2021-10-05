@@ -6,9 +6,9 @@
 #include "esphome/components/uart/uart.h"
 
 namespace esphome {
-namespace victron {
+namespace victron_smart_shunt {
 
-class VictronComponent : public uart::UARTDevice, public Component {
+class VictronSmartShuntComponent : public uart::UARTDevice, public Component {
  public:
   // MPPT
   void set_max_power_yesterday_sensor(sensor::Sensor *max_power_yesterday_sensor) {
@@ -141,5 +141,5 @@ class VictronComponent : public uart::UARTDevice, public Component {
   uint32_t last_transmission_{0};
 };
 
-}  // namespace victron
+}  // namespace victron_smart_shunt
 }  // namespace esphome

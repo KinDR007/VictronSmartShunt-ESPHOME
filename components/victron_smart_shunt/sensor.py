@@ -23,7 +23,7 @@ from esphome.const import (
     UNIT_WATT_HOURS,
 )
 
-from . import CONF_VICTRON_ID, VictronComponent
+from . import CONF_VICTRON_SMART_SHUNT_ID, VictronSmartShuntComponent
 
 # sensors SS
 CONF_INSTANTENEOUS_POWER = "instantaneous_power"  # okamžitý výkon
@@ -65,7 +65,9 @@ CONF_PID = "pid"
 
 CONFIG_SCHEMA = cv.Schema(
     {
-        cv.GenerateID(CONF_VICTRON_ID): cv.use_id(VictronComponent),
+        cv.GenerateID(CONF_VICTRON_SMART_SHUNT_ID): cv.use_id(
+            VictronSmartShuntComponent
+        ),
         cv.Optional(CONF_MAX_POWER_YESTERDAY): sensor.sensor_schema(
             UNIT_WATT, ICON_POWER, 0, DEVICE_CLASS_POWER
         ),
@@ -167,146 +169,146 @@ CONFIG_SCHEMA = cv.Schema(
 
 
 def to_code(config):
-    victron = yield cg.get_variable(config[CONF_VICTRON_ID])
+    var = yield cg.get_variable(config[CONF_VICTRON_SMART_SHUNT_ID])
 
     if CONF_MAX_POWER_YESTERDAY in config:
         sens = yield sensor.new_sensor(config[CONF_MAX_POWER_YESTERDAY])
-        cg.add(victron.set_max_power_yesterday_sensor(sens))
+        cg.add(var.set_max_power_yesterday_sensor(sens))
 
     if CONF_MAX_POWER_TODAY in config:
         sens = yield sensor.new_sensor(config[CONF_MAX_POWER_TODAY])
-        cg.add(victron.set_max_power_today_sensor(sens))
+        cg.add(var.set_max_power_today_sensor(sens))
 
     if CONF_YIELD_TOTAL in config:
         sens = yield sensor.new_sensor(config[CONF_YIELD_TOTAL])
-        cg.add(victron.set_yield_total_sensor(sens))
+        cg.add(var.set_yield_total_sensor(sens))
 
     if CONF_YIELD_YESTERDAY in config:
         sens = yield sensor.new_sensor(config[CONF_YIELD_YESTERDAY])
-        cg.add(victron.set_yield_yesterday_sensor(sens))
+        cg.add(var.set_yield_yesterday_sensor(sens))
 
     if CONF_YIELD_TODAY in config:
         sens = yield sensor.new_sensor(config[CONF_YIELD_TODAY])
-        cg.add(victron.set_yield_today_sensor(sens))
+        cg.add(var.set_yield_today_sensor(sens))
 
     if CONF_PANEL_VOLTAGE in config:
         sens = yield sensor.new_sensor(config[CONF_PANEL_VOLTAGE])
-        cg.add(victron.set_panel_voltage_sensor(sens))
+        cg.add(var.set_panel_voltage_sensor(sens))
 
     if CONF_PANEL_POWER in config:
         sens = yield sensor.new_sensor(config[CONF_PANEL_POWER])
-        cg.add(victron.set_panel_power_sensor(sens))
+        cg.add(var.set_panel_power_sensor(sens))
 
     if CONF_BATTERY_VOLTAGE in config:
         sens = yield sensor.new_sensor(config[CONF_BATTERY_VOLTAGE])
-        cg.add(victron.set_battery_voltage_sensor(sens))
+        cg.add(var.set_battery_voltage_sensor(sens))
 
     if CONF_BATTERY_CURRENT in config:
         sens = yield sensor.new_sensor(config[CONF_BATTERY_CURRENT])
-        cg.add(victron.set_battery_current_sensor(sens))
+        cg.add(var.set_battery_current_sensor(sens))
 
     if CONF_LOAD_CURRENT in config:
         sens = yield sensor.new_sensor(config[CONF_LOAD_CURRENT])
-        cg.add(victron.set_load_current_sensor(sens))
+        cg.add(var.set_load_current_sensor(sens))
 
     if CONF_DAY_NUMBER in config:
         sens = yield sensor.new_sensor(config[CONF_DAY_NUMBER])
-        cg.add(victron.set_day_number_sensor(sens))
+        cg.add(var.set_day_number_sensor(sens))
 
     if CONF_CHARGER_STATUS in config:
         sens = yield sensor.new_sensor(config[CONF_CHARGER_STATUS])
-        cg.add(victron.set_charger_status_sensor(sens))
+        cg.add(var.set_charger_status_sensor(sens))
 
     if CONF_ERROR_CODE in config:
         sens = yield sensor.new_sensor(config[CONF_ERROR_CODE])
-        cg.add(victron.set_error_code_sensor(sens))
+        cg.add(var.set_error_code_sensor(sens))
 
     if CONF_TRACKER_OPERATION in config:
         sens = yield sensor.new_sensor(config[CONF_TRACKER_OPERATION])
-        cg.add(victron.set_tracker_operation_sensor(sens))
+        cg.add(var.set_tracker_operation_sensor(sens))
 
     if CONF_CHARGER_TEXT in config:
         conf = config[CONF_CHARGER_TEXT]
         sens = cg.new_Pvariable(conf[CONF_ID])
         yield text_sensor.register_text_sensor(sens, conf)
-        cg.add(victron.set_charger_text_sensor(sens))
+        cg.add(var.set_charger_text_sensor(sens))
 
     if CONF_ERROR_TEXT in config:
         conf = config[CONF_ERROR_TEXT]
         sens = cg.new_Pvariable(conf[CONF_ID])
         yield text_sensor.register_text_sensor(sens, conf)
-        cg.add(victron.set_error_text_sensor(sens))
+        cg.add(var.set_error_text_sensor(sens))
 
     if CONF_TRACKER_TEXT in config:
         conf = config[CONF_TRACKER_TEXT]
         sens = cg.new_Pvariable(conf[CONF_ID])
         yield text_sensor.register_text_sensor(sens, conf)
-        cg.add(victron.set_tracker_text_sensor(sens))
+        cg.add(var.set_tracker_text_sensor(sens))
 
     if CONF_FW_VERSION in config:
         conf = config[CONF_FW_VERSION]
         sens = cg.new_Pvariable(conf[CONF_ID])
         yield text_sensor.register_text_sensor(sens, conf)
-        cg.add(victron.set_fw_version_sensor(sens))
+        cg.add(var.set_fw_version_sensor(sens))
 
     if CONF_PID in config:
         conf = config[CONF_PID]
         sens = cg.new_Pvariable(conf[CONF_ID])
         yield text_sensor.register_text_sensor(sens, conf)
-        cg.add(victron.set_pid_sensor(sens))
+        cg.add(var.set_pid_sensor(sens))
 
     if CONF_INSTANTENEOUS_POWER in config:
         sens = yield sensor.new_sensor(config[CONF_INSTANTENEOUS_POWER])
-        cg.add(victron.set_instantaneous_power_sensor(sens))
+        cg.add(var.set_instantaneous_power_sensor(sens))
 
     if CONF_TIME_TO_GO in config:
         sens = yield sensor.new_sensor(config[CONF_TIME_TO_GO])
-        cg.add(victron.set_time_to_go_sensor(sens))
+        cg.add(var.set_time_to_go_sensor(sens))
 
     if CONF_STATE_OF_CHARGE in config:
         sens = yield sensor.new_sensor(config[CONF_STATE_OF_CHARGE])
-        cg.add(victron.set_state_of_charge_sensor(sens))
+        cg.add(var.set_state_of_charge_sensor(sens))
 
     if CONF_CONSUMED_AMP_HOURS in config:
         sens = yield sensor.new_sensor(config[CONF_CONSUMED_AMP_HOURS])
-        cg.add(victron.set_consumed_amp_hours_sensor(sens))
+        cg.add(var.set_consumed_amp_hours_sensor(sens))
     # **************************** SS***************
     if CONF_BMV_ALARM_TEXT in config:
         conf = config[CONF_BMV_ALARM_TEXT]
         sens = cg.new_Pvariable(conf[CONF_ID])
         yield text_sensor.register_text_sensor(sens, conf)
-        cg.add(victron.set_bmv_alarm_sensor(sens))
+        cg.add(var.set_bmv_alarm_sensor(sens))
 
     if CONF_BMV_TEXT in config:
         conf = config[CONF_BMV_TEXT]
         sens = cg.new_Pvariable(conf[CONF_ID])
         yield text_sensor.register_text_sensor(sens, conf)
-        cg.add(victron.set_bmv_sensor(sens))
+        cg.add(var.set_bmv_sensor(sens))
 
     if CONF_AMOUNT_OF_CHARGED in config:
         sens = yield sensor.new_sensor(config[CONF_AMOUNT_OF_CHARGED])
-        cg.add(victron.set_amount_of_charged_sensor(sens))
+        cg.add(var.set_amount_of_charged_sensor(sens))
 
     if CONF_MIN_BATTERY_VOLTAGE in config:
         sens = yield sensor.new_sensor(config[CONF_MIN_BATTERY_VOLTAGE])
-        cg.add(victron.set_min_battery_voltage_sensor(sens))
+        cg.add(var.set_min_battery_voltage_sensor(sens))
 
     if CONF_MAX_BATTERY_VOLTAGE in config:
         sens = yield sensor.new_sensor(config[CONF_MAX_BATTERY_VOLTAGE])
-        cg.add(victron.set_max_battery_voltage_sensor(sens))
+        cg.add(var.set_max_battery_voltage_sensor(sens))
 
     if CONF_LAST_FULL_CHARGE in config:
         sens = yield sensor.new_sensor(config[CONF_LAST_FULL_CHARGE])
-        cg.add(victron.set_last_full_charge_sensor(sens))
+        cg.add(var.set_last_full_charge_sensor(sens))
 
     if CONF_DEEPEST_DISCHARGE in config:
         sens = yield sensor.new_sensor(config[CONF_DEEPEST_DISCHARGE])
-        cg.add(victron.set_depth_deepest_dis_sensor(sens))
+        cg.add(var.set_depth_deepest_dis_sensor(sens))
 
     if CONF_LAST_DISCHARGE in config:
         sens = yield sensor.new_sensor(config[CONF_LAST_DISCHARGE])
-        cg.add(victron.set_depth_of_the_last_discharge_sensor(sens))
+        cg.add(var.set_depth_of_the_last_discharge_sensor(sens))
 
     if CONF_DISCHARGED_ENERGY in config:
         sens = yield sensor.new_sensor(config[CONF_DISCHARGED_ENERGY])
-        cg.add(victron.set_amount_of_discharged_energy_sensor(sens))
+        cg.add(var.set_amount_of_discharged_energy_sensor(sens))

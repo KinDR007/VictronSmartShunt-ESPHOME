@@ -6,14 +6,16 @@ from esphome.const import CONF_ID
 DEPENDENCIES = ["uart"]
 AUTO_LOAD = ["sensor", "text_sensor"]
 
-victron_ns = cg.esphome_ns.namespace("victron")
-VictronComponent = victron_ns.class_("VictronComponent", uart.UARTDevice, cg.Component)
+victron_smart_shunt_ns = cg.esphome_ns.namespace("victron_smart_shunt")
+VictronSmartShuntComponent = victron_smart_shunt_ns.class_(
+    "VictronSmartShuntComponent", uart.UARTDevice, cg.Component
+)
 
-CONF_VICTRON_ID = "victron_id"
+CONF_VICTRON_SMART_SHUNT_ID = "victron_smart_shunt_id"
 
 CONFIG_SCHEMA = uart.UART_DEVICE_SCHEMA.extend(
     {
-        cv.GenerateID(): cv.declare_id(VictronComponent),
+        cv.GenerateID(): cv.declare_id(VictronSmartShuntComponent),
     }
 )
 
