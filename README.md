@@ -6,11 +6,11 @@ A configured uart component is required.
 
 Example:
 ```yaml
-victron:
+victron_smart_shunt:
   uart_id: the_uart
 
 sensor:
-  - platform: victron
+  - platform: victron_smart_shunt
     battery_voltage:
       id: bv
     battery_current:
@@ -22,7 +22,7 @@ The `uart_id` is optional.
 All sensors are optional.
 
 ```yaml
-  - platform: victron
+  - platform: victron_smart_shunt
     battery_voltage:
       name: "Battery Voltage"  
       id: bv
@@ -102,7 +102,7 @@ All sensors are optional.
 ```
 
 Install:
-copy folder `victron` in `custom_components` folder to `~/config/esphome/custom_components/victron`
+copy folder `victron_smart_shunt` in `custom_components` folder to `~/config/esphome/custom_components/victron_smart_shunt`
 
 Full example in `smartshunt.yaml`
 
