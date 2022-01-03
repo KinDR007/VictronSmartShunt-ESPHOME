@@ -323,9 +323,8 @@ def to_code(config):
 
     if CONF_NUMBER_OF_FULL_DIS in config:
         sens = yield sensor.new_sensor(config[CONF_NUMBER_OF_FULL_DIS])
-        cg.add(var.set_number_of_full_discharges_sensor(sens))   
+        cg.add(var.set_number_of_full_discharges_sensor(sens))
 
     if CONF_NUMBER_OF_CHARGE_CYCLES in config:
         sens = yield sensor.new_sensor(config[CONF_NUMBER_OF_CHARGE_CYCLES])
-        cg.add(var.set_number_of_charge_cycles_sensor(sens))   
-                     
+        cg.add(var.set_number_of_charge_cycles_sensor(sens))                
