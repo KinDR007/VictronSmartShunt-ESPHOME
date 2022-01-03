@@ -46,10 +46,18 @@ class VictronSmartShuntComponent : public uart::UARTDevice, public Component {
   void set_tracker_text_sensor(text_sensor::TextSensor *tracker_text_sensor) {
     tracker_text_sensor_ = tracker_text_sensor;
   }
-  void set_fw_version_sensor(text_sensor::TextSensor *fw_version_sensor) { fw_version_sensor_ = fw_version_sensor; }
-  void set_pid_sensor(text_sensor::TextSensor *pid_sensor) { pid_sensor_ = pid_sensor; }
-  void set_number_of_charge_cycles_sensor(sensor::Sensor *number_of_charge_cycles_sensor) { number_of_charge_cycles_sensor_ = number_of_charge_cycles_sensor; }
-  void set_number_of_full_discharges_sensor(sensor::Sensor *number_of_full_discharges_sensor) { number_of_full_discharges_sensor_ = number_of_full_discharges_sensor; }
+  void set_fw_version_sensor(text_sensor::TextSensor *fw_version_sensor) {
+    fw_version_sensor_ = fw_version_sensor;
+  }
+  void set_pid_sensor(text_sensor::TextSensor *pid_sensor) {
+    pid_sensor_ = pid_sensor;
+  }
+  void set_number_of_charge_cycles_sensor(sensor::Sensor *number_of_charge_cycles_sensor) {
+    number_of_charge_cycles_sensor_ = number_of_charge_cycles_sensor; 
+  }
+  void set_number_of_full_discharges_sensor(sensor::Sensor *number_of_full_discharges_sensor) {
+    number_of_full_discharges_sensor_ = number_of_full_discharges_sensor;
+  }
   void set_last_full_charge_sensor(sensor::Sensor *last_full_charge_sensor) {
     last_full_charge_sensor_ = last_full_charge_sensor;
   }  // H9 sec Number of seconds since last full charge
