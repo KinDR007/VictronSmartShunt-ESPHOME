@@ -25,8 +25,8 @@ from esphome.const import (
 
 from . import CONF_VICTRON_SMART_SHUNT_ID, VictronSmartShuntComponent
 
-# sensors SS
-CONF_INSTANTENEOUS_POWER = "instantaneous_power"  # okamžitý výkon
+
+CONF_INSTANTENEOUS_POWER = "instantaneous_power"
 CONF_TIME_TO_GO = "time_to_go"
 CONF_STATE_OF_CHARGE = "state_of_charge"
 CONF_CONSUMED_AMP_HOURS = "consumed_amp_hours"
@@ -39,11 +39,11 @@ CONF_LAST_FULL_CHARGE = "last_full_charge"
 CONF_DEEPEST_DISCHARGE = "deepest_discharge"
 CONF_LAST_DISCHARGE = "last_discharge"
 CONF_DISCHARGED_ENERGY = "discharged_energy"
-CONF_NUMBER_OF_FULL_DIS = "number_of_full_discharges" #H5
-CONF_NUMBER_OF_CHARGE_CYCLES = "number_of_charge_cycles"   #H4
+CONF_NUMBER_OF_FULL_DIS = "number_of_full_discharges"
+CONF_NUMBER_OF_CHARGE_CYCLES = "number_of_charge_cycles"
 CONF_DISCHARGED_ENERGY = "discharged_energy"
 
-# sensors
+
 CONF_MAX_POWER_YESTERDAY = "max_power_yesterday"
 CONF_MAX_POWER_TODAY = "max_power_today"
 CONF_YIELD_TOTAL = "yield_total"
@@ -58,7 +58,7 @@ CONF_ERROR_CODE = "error_code"
 CONF_TRACKER_OPERATION = "tracker_operation"
 CONF_LOAD_CURRENT = "load_current"
 
-# text sensors
+
 CONF_CHARGER_TEXT = "charger_text"
 CONF_ERROR_TEXT = "error_text"
 CONF_TRACKER_TEXT = "tracker_text"
@@ -324,7 +324,7 @@ def to_code(config):
     if CONF_NUMBER_OF_FULL_DIS in config:
         sens = yield sensor.new_sensor(config[CONF_NUMBER_OF_FULL_DIS])
         cg.add(var.set_number_of_full_discharges_sensor(sens))   
-        
+
     if CONF_NUMBER_OF_CHARGE_CYCLES in config:
         sens = yield sensor.new_sensor(config[CONF_NUMBER_OF_CHARGE_CYCLES])
         cg.add(var.set_number_of_charge_cycles_sensor(sens))   

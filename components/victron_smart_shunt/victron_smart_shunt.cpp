@@ -38,11 +38,10 @@ void VictronSmartShuntComponent::dump_config() {
   LOG_SENSOR("  ", "Minimum main (battery) voltage", min_battery_voltage_sensor_);
   LOG_SENSOR("  ", "Maximum main (battery) voltage", max_battery_voltage_sensor_);
   LOG_SENSOR("  ", "Amount of charged energy", amount_of_charged_sensor_);
-// --- 3.1.22 start
 
   LOG_SENSOR("  ", "Number of charge cycles", number_of_charge_cycles_sensor_);
   LOG_SENSOR("  ", "Number of full discharges", number_of_full_discharges_sensor_);
-// --- 3.1.22 end
+
   LOG_SENSOR("  ", "Number of seconds since last full charge", last_full_charge_sensor_);
   LOG_SENSOR("  ", "Depth of the deepest discharge", depth_deepest_dis_sensor_);
   LOG_SENSOR("  ", "Depth of the last discharge", depth_of_the_last_discharge_sensor_);
@@ -354,10 +353,10 @@ static const std::string pid_text(int value) {
 void VictronSmartShuntComponent::handle_value_() {
   int value;
 
-  if (label_ == "H5") { //Number of full discharges
+  if (label_ == "H5") { 
     if (number_of_full_discharges_sensor_ != nullptr)
       number_of_full_discharges_sensor_->publish_state(atoi(value_.c_str()) ); // NOLINT(cert-err34-c)
-  } else if (label_ == "H4") { //Number of charge cycles
+  } else if (label_ == "H4") { 
     if (number_of_charge_cycles_sensor_ != nullptr)
        number_of_charge_cycles_sensor_->publish_state(atoi(value_.c_str()) ); // NOLINT(cert-err34-c)
   } else if (label_ == "H9") {

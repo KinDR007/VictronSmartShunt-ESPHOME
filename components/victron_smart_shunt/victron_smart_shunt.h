@@ -51,15 +51,15 @@ class VictronSmartShuntComponent : public uart::UARTDevice, public Component {
   // MPPT end
 
   // SmartShunt
-// --- 3..1.22 start
-  void set_number_of_charge_cycles_sensor(sensor::Sensor *number_of_charge_cycles_sensor) { // H4 Number of charge cycles
+
+  void set_number_of_charge_cycles_sensor(sensor::Sensor *number_of_charge_cycles_sensor) { 
     number_of_charge_cycles_sensor_ = number_of_charge_cycles_sensor;
   }  
-  void set_number_of_full_discharges_sensor(sensor::Sensor *number_of_full_discharges_sensor) { // H5 Number of full discharges
+  void set_number_of_full_discharges_sensor(sensor::Sensor *number_of_full_discharges_sensor) { 
     number_of_full_discharges_sensor_ = number_of_full_discharges_sensor;
   }  
 
-  //--- 3.1.22 end
+
   void set_last_full_charge_sensor(sensor::Sensor *last_full_charge_sensor) {
     last_full_charge_sensor_ = last_full_charge_sensor;
   }  // H9 sec Number of seconds since last full charge
@@ -129,10 +129,10 @@ class VictronSmartShuntComponent : public uart::UARTDevice, public Component {
   sensor::Sensor *min_battery_voltage_sensor_{nullptr};
   sensor::Sensor *max_battery_voltage_sensor_{nullptr};
   sensor::Sensor *amount_of_charged_sensor_{nullptr};
-// --- 3..1.22 start
+
   sensor::Sensor *number_of_charge_cycles_sensor_{nullptr};
   sensor::Sensor *number_of_full_discharges_sensor_{nullptr};
-// --- 3..1.22 end
+
   sensor::Sensor *last_full_charge_sensor_{nullptr};
   sensor::Sensor *depth_deepest_dis_sensor_{nullptr};
   sensor::Sensor *depth_of_the_last_discharge_sensor_{nullptr};
