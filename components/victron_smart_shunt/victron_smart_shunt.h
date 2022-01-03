@@ -54,12 +54,10 @@ class VictronSmartShuntComponent : public uart::UARTDevice, public Component {
 
   void set_number_of_charge_cycles_sensor(sensor::Sensor *number_of_charge_cycles_sensor) { 
     number_of_charge_cycles_sensor_ = number_of_charge_cycles_sensor;
-  }  
+  }
   void set_number_of_full_discharges_sensor(sensor::Sensor *number_of_full_discharges_sensor) { 
     number_of_full_discharges_sensor_ = number_of_full_discharges_sensor;
-  }  
-
-
+  }
   void set_last_full_charge_sensor(sensor::Sensor *last_full_charge_sensor) {
     last_full_charge_sensor_ = last_full_charge_sensor;
   }  // H9 sec Number of seconds since last full charge
@@ -129,15 +127,12 @@ class VictronSmartShuntComponent : public uart::UARTDevice, public Component {
   sensor::Sensor *min_battery_voltage_sensor_{nullptr};
   sensor::Sensor *max_battery_voltage_sensor_{nullptr};
   sensor::Sensor *amount_of_charged_sensor_{nullptr};
-
-  sensor::Sensor *number_of_charge_cycles_sensor_{nullptr};
-  sensor::Sensor *number_of_full_discharges_sensor_{nullptr};
-
   sensor::Sensor *last_full_charge_sensor_{nullptr};
   sensor::Sensor *depth_deepest_dis_sensor_{nullptr};
   sensor::Sensor *depth_of_the_last_discharge_sensor_{nullptr};
   sensor::Sensor *amount_of_discharged_energy_sensor_{nullptr};
-
+  sensor::Sensor *number_of_charge_cycles_sensor_{nullptr};
+  sensor::Sensor *number_of_full_discharges_sensor_{nullptr};
   text_sensor::TextSensor *bmv_alarm_sensor_{nullptr};
   text_sensor::TextSensor *bmv_sensor_{nullptr};
   // SS
@@ -146,6 +141,7 @@ class VictronSmartShuntComponent : public uart::UARTDevice, public Component {
   text_sensor::TextSensor *tracker_text_sensor_{nullptr};
   text_sensor::TextSensor *fw_version_sensor_{nullptr};
   text_sensor::TextSensor *pid_sensor_{nullptr};
+
 
   int state_{0};
   std::string label_;
