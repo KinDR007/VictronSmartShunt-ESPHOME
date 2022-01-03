@@ -39,7 +39,9 @@ CONF_LAST_FULL_CHARGE = "last_full_charge"
 CONF_DEEPEST_DISCHARGE = "deepest_discharge"
 CONF_LAST_DISCHARGE = "last_discharge"
 CONF_DISCHARGED_ENERGY = "discharged_energy"
-
+CONF_NUMBER_OF_FULL_DIS = "number_of_full_discharges" #H5
+CONF_NUMBER_OF_CHARGE_CYCLES = "number_of_charge_cycles"   #H4
+CONF_DISCHARGED_ENERGY = "discharged_energy"
 
 # sensors
 CONF_MAX_POWER_YESTERDAY = "max_power_yesterday"
@@ -163,6 +165,12 @@ CONFIG_SCHEMA = cv.Schema(
         ),
         cv.Optional(CONF_DISCHARGED_ENERGY): sensor.sensor_schema(
             UNIT_WATT_HOURS, ICON_POWER, 0, DEVICE_CLASS_POWER
+        ),
+        cv.Optional(CONF_NUMBER_OF_FULL_DIS): sensor.sensor_schema(
+            UNIT_EMPTY, ICON_EMPTY, 0, DEVICE_CLASS_EMPTY
+        ),
+        cv.Optional(CONF_NUMBER_OF_CHARGE_CYCLES): sensor.sensor_schema(
+            UNIT_EMPTY, ICON_EMPTY, 0, DEVICE_CLASS_EMPTY
         ),
     }
 )
@@ -312,3 +320,12 @@ def to_code(config):
     if CONF_DISCHARGED_ENERGY in config:
         sens = yield sensor.new_sensor(config[CONF_DISCHARGED_ENERGY])
         cg.add(var.set_amount_of_discharged_energy_sensor(sens))
+
+    if CONF_NUMBER_OF_FULL_DIS in config:
+        sens = yield sensor.new_sensor(config[CONF_NUMBER_OF_FULL_DIS])
+        cg.add(var.set_number_of_full_discharges_sensor(sens))   
+        
+    if CONF_NUMBER_OF_CHARGE_CYCLES in config:
+        sens = yield sensor.new_sensor(config[CONF_NUMBER_OF_CHARGE_CYCLES])
+        cg.add(var.set_number_of_charge_cycles_sensor(sens))   
+                     
