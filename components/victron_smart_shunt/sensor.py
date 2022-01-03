@@ -26,7 +26,7 @@ from esphome.const import (
 from . import CONF_VICTRON_SMART_SHUNT_ID, VictronSmartShuntComponent
 
 
-CONF_INSTANTENEOUS_POWER = "instantaneous_power"
+CONF_INSTANTENEOUS_POWER = "instanteneous_power"
 CONF_TIME_TO_GO = "time_to_go"
 CONF_STATE_OF_CHARGE = "state_of_charge"
 CONF_CONSUMED_AMP_HOURS = "consumed_amp_hours"
@@ -39,7 +39,7 @@ CONF_LAST_FULL_CHARGE = "last_full_charge"
 CONF_DEEPEST_DISCHARGE = "deepest_discharge"
 CONF_LAST_DISCHARGE = "last_discharge"
 CONF_DISCHARGED_ENERGY = "discharged_energy"
-CONF_NUMBER_OF_FULL_DIS = "number_of_full_discharges"
+CONF_NUMBER_OF_FULL_DIS = "number_of_full_dis"
 CONF_NUMBER_OF_CHARGE_CYCLES = "number_of_charge_cycles"
 CONF_DISCHARGED_ENERGY = "discharged_energy"
 
