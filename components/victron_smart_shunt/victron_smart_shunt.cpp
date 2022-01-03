@@ -356,10 +356,10 @@ void VictronSmartShuntComponent::handle_value_() {
 
   if (label_ == "H5") { //Number of full discharges
     if (number_of_full_discharges_sensor_ != nullptr)
-      number_of_full_discharges_sensor_->publish_state(atoi(value_.c_str()) );
+      number_of_full_discharges_sensor_->publish_state(atoi(value_.c_str()) ); // NOLINT(cert-err34-c)
   } else if (label_ == "H4") { //Number of charge cycles
     if (number_of_charge_cycles_sensor_ != nullptr)
-       number_of_charge_cycles_sensor_->publish_state(atoi(value_.c_str()) );
+       number_of_charge_cycles_sensor_->publish_state(atoi(value_.c_str()) ); // NOLINT(cert-err34-c)
   } else if (label_ == "H9") {
     if (last_full_charge_sensor_ != nullptr)
       // sec -> min
