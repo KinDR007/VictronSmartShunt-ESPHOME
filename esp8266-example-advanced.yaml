@@ -98,8 +98,8 @@ sensor:
       name: "pid"
       id: pid
 
-    instantaneous_power:
-      name: "instantaneous power"
+    instanteneous_power:
+      name: "instanteneous power"
       id: instantaneous_power
       accuracy_decimals: ${accuracy}
 
