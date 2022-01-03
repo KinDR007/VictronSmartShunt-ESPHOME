@@ -34,7 +34,15 @@ All sensors are optional.
     fw_version:
       name: "fw"  
       id: fw
+      
+    number_of_full_dis:
+      name: "Number of full discharges"
+      id: number_of_full_discharges
 
+    number_of_charge_cycles:
+      name: "Number of charge cycles"
+      id: number_of_charge_cycles
+      
     pid:
       name: "pid"  
       id: pid
