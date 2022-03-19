@@ -1,11 +1,63 @@
 # VictronSmartShunt-ESPHOME
- SmartShunt ve.direct to ESPHOME node
+BMV and SmartShunt ve.direct to ESPHOME node
+
+# VictronMPPT-ESPHOME
+
+ESPHome component to monitor a Victron BMV and SmartShunt via ve.direct / UART TTL
+
+## Supported devices
+
+All BMV and SmartShunt providing a ve.direct port.
+
+## Tested devices
+
+  * Victron SmartShunt 500A/50mV
 
 
-A configured uart component is required.
+## Requirements
+
+* [ESPHome 2021.10 or higher](https://github.com/esphome/esphome/releases).
+* Generic ESP32 or ESP8266 board
+
+## Schematics
+
+```
+                UART-TTL
+┌────────────────┐                ┌──────────────────┐
+│           GND o│<-------------->│o GND             │
+│ BMV or     TX o│--------------->│o D7   ESP32/     │
+│ SmartShunt RX o│                │       ESP8266    │<-- GND
+│       5V/3.3V o│                │                  │<-- 3.3V
+└────────────────┘                └──────────────────┘
+
+# UART-TTL jack (JST-PH 2.0mm pinch)
+┌─── ─────── ────┐
+│                │
+│ O   O   O   O  │
+│GND  RX  TX VCC │
+└────────────────┘
+```
+
+If you are unsure about to pin order please measure the voltage between GND and VCC (5V/3.3V). If you measure a positive voltage you know the position of VCC and GND!
+
+### JST-PH jack
+
+| Pin     | Purpose      | ESP pin        |
+| :-----: | :----------- | :------------- |
+|  **1**  | **GND**      | GND            |
+|    2    | RX           |                |
+|  **3**  | **TX**       | D7 (RX)        |
+|    4    | 5V           |                |
+
+## Installation
+
+You can install this component with [ESPHome external components feature](https://esphome.io/components/external_components.html) like this:
 
 Example:
 ```yaml
+external_components:
+  - source: github://KinDR007/VictronMPPT-ESPHOME@main
+
 victron_smart_shunt:
   uart_id: the_uart
 
@@ -100,9 +152,34 @@ All sensors are optional.
       id: state_of_charge
       name: "SoC"  
 ```
+The available numeric sensors are:
+- `instanteneous_power`
+- `time_to_go`
+- `state_of_charge`
+- `consumed_amp_hours`
+- `min_battery_voltage`
+- `max_battery_voltage`
+- `amount_of_charged`
+- `last_full_charge`
+- `deepest_discharge`
+- `last_discharge`
+- `discharged_energy`
+- `number_of_full_dis`
+- `number_of_charge_cycles`
+- `discharged_energy`
 
-Install:
-copy folder `victron_smart_shunt` in `custom_components` folder to `~/config/esphome/custom_components/victron_smart_shunt`
+
+The available text sensors are:
+- `bmv_alarm_text`
+- `bmv_text`
+- `charger_text`
+- `error_text`
+- `alarm_reason_text`
+- `tracker_text`
+- `fw_version`
+- `pid`
+
+
 
 Full example in `smartshunt.yaml`
 
