@@ -10,3 +10,4 @@ secret.yaml
 __pycache__/
 *.py[cod]
 *$py.class
+checks.json

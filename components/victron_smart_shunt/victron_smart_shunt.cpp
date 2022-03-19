@@ -125,7 +125,7 @@ static const std::string error_code_text(int value) {
     case 0:
       return "No error";
     case 1:
-      return "Low Voltage";      
+      return "Low Voltage";
     case 2:
       return "Battery voltage too high";
     case 4:
@@ -133,7 +133,7 @@ static const std::string error_code_text(int value) {
     case 8:
       return "Low Starte Voltage";
     case 16:
-      return "High Starter Voltage";              
+      return "High Starter Voltage";
     case 17:
       return "Charger temperature too high";
     case 18:
@@ -149,7 +149,7 @@ static const std::string error_code_text(int value) {
     case 28:
       return "Converter issue";
     case 32:
-      return "Low Temperature";      
+      return "Low Temperature";
     case 33:
       return "Input voltage too high (solar panel)";
     case 34:
@@ -159,7 +159,7 @@ static const std::string error_code_text(int value) {
     case 39:
       return "Input shutdown (due to current flow during off mode)";
     case 64:
-      return "High Temperature";      
+      return "High Temperature";
     case 65:
       return "Lost communication with one of devices";
     case 66:
@@ -175,7 +175,7 @@ static const std::string error_code_text(int value) {
     case 119:
       return "User settings invalid";
     case 128:
-      return "Mid Voltage";      
+      return "Mid Voltage";
     default:
       return "Unknown";
   }
