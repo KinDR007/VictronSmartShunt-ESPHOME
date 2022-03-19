@@ -56,10 +56,11 @@ CONF_CHARGER_STATUS = "charger_status"
 CONF_ERROR_CODE = "error_code"
 CONF_TRACKER_OPERATION = "tracker_operation"
 CONF_LOAD_CURRENT = "load_current"
-
+bmv_alarm_reason_sensor_
 
 CONF_CHARGER_TEXT = "charger_text"
 CONF_ERROR_TEXT = "error_text"
+CONF_ALARM_REASON_TEXT = "alarm_reason_text"
 CONF_TRACKER_TEXT = "tracker_text"
 CONF_FW_VERSION = "fw_version"
 CONF_PID = "pid"
@@ -157,6 +158,9 @@ CONFIG_SCHEMA = cv.Schema(
             {cv.GenerateID(): cv.declare_id(text_sensor.TextSensor)}
         ),
         cv.Optional(CONF_ERROR_TEXT): text_sensor.TEXT_SENSOR_SCHEMA.extend(
+            {cv.GenerateID(): cv.declare_id(text_sensor.TextSensor)}
+        ),
+        cv.Optional(CONF_ALARM_REASON_TEXT): text_sensor.TEXT_SENSOR_SCHEMA.extend(
             {cv.GenerateID(): cv.declare_id(text_sensor.TextSensor)}
         ),
         cv.Optional(CONF_TRACKER_TEXT): text_sensor.TEXT_SENSOR_SCHEMA.extend(
@@ -326,6 +330,12 @@ def to_code(config):
         sens = cg.new_Pvariable(conf[CONF_ID])
         yield text_sensor.register_text_sensor(sens, conf)
         cg.add(var.set_error_text_sensor(sens))
+
+    if CONF_ALARM_REASON_TEXT in config:
+        conf = config[CONF_ALARM_REASON_TEXT]
+        sens = cg.new_Pvariable(conf[CONF_ID])
+        yield text_sensor.register_text_sensor(sens, conf)
+        cg.add(var.set_bmv_alarm_reason_sensor(sens))
 
     if CONF_TRACKER_TEXT in config:
         conf = config[CONF_TRACKER_TEXT]
