@@ -1,8 +1,4 @@
 # VictronSmartShunt-ESPHOME
-BMV and SmartShunt ve.direct to ESPHOME node
-
-# VictronMPPT-ESPHOME
-
 ESPHome component to monitor a Victron BMV and SmartShunt via ve.direct / UART TTL
 
 ## Supported devices
