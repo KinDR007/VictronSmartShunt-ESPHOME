@@ -33,6 +33,7 @@ void VictronSmartShuntComponent::dump_config() {
   LOG_SENSOR("  ", "State of Charge", state_of_charge_sensor_);
 
   LOG_TEXT_SENSOR("  ", "BMV-Alarm", bmv_alarm_sensor_);
+  LOG_TEXT_SENSOR("  ", "BMV-Alarm Reason", bmv_alarm_reason_sensor_);
   LOG_TEXT_SENSOR("  ", "BMV-PID", bmv_sensor_);
 
   LOG_SENSOR("  ", "Minimum main (battery) voltage", min_battery_voltage_sensor_);
@@ -123,8 +124,16 @@ static const std::string error_code_text(int value) {
   switch (value) {
     case 0:
       return "No error";
+    case 1:
+      return "Low Voltage";      
     case 2:
       return "Battery voltage too high";
+    case 4:
+      return "Low SOC";
+    case 8:
+      return "Low Starte Voltage";
+    case 16:
+      return "High Starter Voltage";              
     case 17:
       return "Charger temperature too high";
     case 18:
@@ -139,6 +148,8 @@ static const std::string error_code_text(int value) {
       return "Terminals overheated";
     case 28:
       return "Converter issue";
+    case 32:
+      return "Low Temperature";      
     case 33:
       return "Input voltage too high (solar panel)";
     case 34:
@@ -147,6 +158,8 @@ static const std::string error_code_text(int value) {
       return "Input shutdown (excessive battery voltage)";
     case 39:
       return "Input shutdown (due to current flow during off mode)";
+    case 64:
+      return "High Temperature";      
     case 65:
       return "Lost communication with one of devices";
     case 66:
@@ -161,6 +174,8 @@ static const std::string error_code_text(int value) {
       return "Invalid/incompatible firmware";
     case 119:
       return "User settings invalid";
+    case 128:
+      return "Mid Voltage";      
     default:
       return "Unknown";
   }
@@ -455,6 +470,10 @@ void VictronSmartShuntComponent::handle_value_() {
       error_code_sensor_->publish_state(value);
     if (error_text_sensor_ != nullptr)
       error_text_sensor_->publish_state(error_code_text(value));
+  } else if (label_ == "AR") {
+    value = atoi(value_.c_str());  // NOLINT(cert-err34-c)
+    if (bmv_alarm_reason_sensor_ != nullptr)
+      bmv_alarm_reason_sensor_->publish_state(error_code_text(value));
   } else if (label_ == "MPPT") {
     value = atoi(value_.c_str());  // NOLINT(cert-err34-c)
     if (tracker_operation_sensor_ != nullptr)

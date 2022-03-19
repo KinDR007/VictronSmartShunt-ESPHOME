@@ -89,6 +89,7 @@ class VictronSmartShuntComponent : public uart::UARTDevice, public Component {
   }
 
   void set_bmv_alarm_sensor(text_sensor::TextSensor *bmv_alarm_sensor) { bmv_alarm_sensor_ = bmv_alarm_sensor; }
+  void set_bmv_alarm_reason_sensor(text_sensor::TextSensor *bmv_alarm_reason_sensor) { bmv_alarm_reason_sensor_ = bmv_alarm_reason_sensor; }
   void set_bmv_sensor(text_sensor::TextSensor *bmv_sensor) { bmv_sensor_ = bmv_sensor; }
 
   // SmartShunt end
@@ -130,6 +131,7 @@ class VictronSmartShuntComponent : public uart::UARTDevice, public Component {
   sensor::Sensor *number_of_charge_cycles_sensor_{nullptr};
   sensor::Sensor *number_of_full_discharges_sensor_{nullptr};
   text_sensor::TextSensor *bmv_alarm_sensor_{nullptr};
+  text_sensor::TextSensor *bmv_alarm_reason_sensor_{nullptr};
   text_sensor::TextSensor *bmv_sensor_{nullptr};
   // SS
   text_sensor::TextSensor *charger_text_sensor_{nullptr};
