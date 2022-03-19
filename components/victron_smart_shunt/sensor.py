@@ -56,7 +56,6 @@ CONF_CHARGER_STATUS = "charger_status"
 CONF_ERROR_CODE = "error_code"
 CONF_TRACKER_OPERATION = "tracker_operation"
 CONF_LOAD_CURRENT = "load_current"
-bmv_alarm_reason_sensor_
 
 CONF_CHARGER_TEXT = "charger_text"
 CONF_ERROR_TEXT = "error_text"
