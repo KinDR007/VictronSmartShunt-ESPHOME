@@ -52,7 +52,7 @@ You can install this component with [ESPHome external components feature](https:
 Example:
 ```yaml
 external_components:
-  - source: github://KinDR007/VictronMPPT-ESPHOME@main
+  - source: github://KinDR007/VictronSmartShunt-ESPHOME@main
 
 victron_smart_shunt:
   uart_id: the_uart
