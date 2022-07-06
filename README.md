@@ -21,17 +21,17 @@ All BMV and SmartShunt providing a ve.direct port.
                 UART-TTL
 ┌────────────────┐                ┌──────────────────┐
 │           GND o│<-------------->│o GND             │
-│ BMV or     TX o│--------------->│o D7   ESP32/     │
-│ SmartShunt RX o│                │       ESP8266    │<-- GND
+│ BMV or     RX o│                │       ESP32/     │
+│ SmartShunt TX o│--------------->│o D7   ESP8266    │<-- GND
 │       5V/3.3V o│                │                  │<-- 3.3V
 └────────────────┘                └──────────────────┘
 
 # UART-TTL jack (JST-PH 2.0mm pinch)
-┌─── ─────── ────┐
+┌────────────────┐
 │                │
 │ O   O   O   O  │
-│GND  RX  TX VCC │
-└────────────────┘
+│VCC  TX  RX GND │
+└─── ─────── ────┘
 ```
 
 If you are unsure about to pin order please measure the voltage between GND and VCC (5V/3.3V). If you measure a positive voltage you know the position of VCC and GND!
@@ -53,6 +53,15 @@ Example:
 ```yaml
 external_components:
   - source: github://KinDR007/VictronSmartShunt-ESPHOME@main
+
+uart:
+  id: the_uart
+  rx_pin: D7
+  baud_rate: 19200
+  stop_bits: 1
+  data_bits: 8
+  parity: NONE
+  rx_buffer_size: 256
 
 victron_smart_shunt:
   uart_id: the_uart
