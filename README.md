@@ -81,45 +81,45 @@ All sensors are optional.
 ```yaml
   - platform: victron_smart_shunt
     battery_voltage:
-      name: "Battery Voltage"  
+      name: "Battery Voltage"
       id: bv
 
     battery_current:
-      name: "Battery Current" 
+      name: "Battery Current"
       id: bc
 
     fw_version:
-      name: "fw"  
+      name: "fw"
       id: fw
 
     pid:
-      name: "pid"  
+      name: "pid"
       id: pid
 
     instantaneous_power:
-      name: "instantaneous power"  
-      id: instantaneous_power      
+      name: "instantaneous power"
+      id: instantaneous_power
 
     time_to_go:
-      name: "time to go"  
+      name: "time to go"
       id: time_to_go
 
     consumed_amp_hours:
       name: "consumed amp hours"
-      id: consumed_amp_hours  
+      id: consumed_amp_hours
       unit_of_measurement: Ah
 
     min_battery_voltage:
       name: "Min battery voltage"
-      id: min_battery_voltage   
+      id: min_battery_voltage
 
-    max_battery_voltage: 
+    max_battery_voltage:
       name: "Max battery voltage"
-      id: max_battery_voltage     
+      id: max_battery_voltage
 
     amount_of_charged:
       name: "Amount of charged"
-      id:  amount_of_charged   
+      id:  amount_of_charged
       filters:
         - multiply: 0.001
       unit_of_measurement: kWh
@@ -127,7 +127,7 @@ All sensors are optional.
     bmv_alarm:
       name: "BMV alarm"
       id: bmv_alarm
-      
+
     bmv_pid:
       name: "bmv - pid"
       id: bmv_pid
@@ -138,7 +138,7 @@ All sensors are optional.
 
     deepest_discharge:
       name: "Depth of the deepest discharge"
-      id: deepest_discharge   
+      id: deepest_discharge
       unit_of_measurement: Ah
 
     last_discharge:
@@ -148,17 +148,17 @@ All sensors are optional.
 
     discharged_energy:
       name: "Amount of discharged energy"
-      id: discharged_energy   
+      id: discharged_energy
       filters:
         - multiply: 0.001
       unit_of_measurement: kWh
 
     state_of_charge:
       id: state_of_charge
-      name: "SoC"  
+      name: "SoC"
 ```
 The available numeric sensors are:
-- `instanteneous_power`
+- `instantaneous_power`
 - `time_to_go`
 - `state_of_charge`
 - `consumed_amp_hours`
@@ -191,4 +191,4 @@ Full example in `smartshunt.yaml`
 `Big thanks for help to ssieb`
 
 ```
-#victron #esphome #smartshunt #bmv #ve.direct 
+#victron #esphome #smartshunt #bmv #ve.direct

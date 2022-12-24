@@ -25,7 +25,7 @@ from esphome.const import (
 
 from . import CONF_VICTRON_SMART_SHUNT_ID, VictronSmartShuntComponent
 
-CONF_INSTANTENEOUS_POWER = "instanteneous_power"
+CONF_INSTANTANEOUS_POWER = "instantaneous_power"
 CONF_TIME_TO_GO = "time_to_go"
 CONF_STATE_OF_CHARGE = "state_of_charge"
 CONF_CONSUMED_AMP_HOURS = "consumed_amp_hours"
@@ -171,7 +171,7 @@ CONFIG_SCHEMA = cv.Schema(
         cv.Optional(CONF_PID): text_sensor.TEXT_SENSOR_SCHEMA.extend(
             {cv.GenerateID(): cv.declare_id(text_sensor.TextSensor)}
         ),
-        cv.Optional(CONF_INSTANTENEOUS_POWER): sensor.sensor_schema(
+        cv.Optional(CONF_INSTANTANEOUS_POWER): sensor.sensor_schema(
             unit_of_measurement=UNIT_WATT,
             icon=ICON_POWER,
             accuracy_decimals=0,
@@ -354,8 +354,8 @@ def to_code(config):
         yield text_sensor.register_text_sensor(sens, conf)
         cg.add(var.set_pid_sensor(sens))
 
-    if CONF_INSTANTENEOUS_POWER in config:
-        sens = yield sensor.new_sensor(config[CONF_INSTANTENEOUS_POWER])
+    if CONF_INSTANTANEOUS_POWER in config:
+        sens = yield sensor.new_sensor(config[CONF_INSTANTANEOUS_POWER])
         cg.add(var.set_instantaneous_power_sensor(sens))
 
     if CONF_TIME_TO_GO in config:
