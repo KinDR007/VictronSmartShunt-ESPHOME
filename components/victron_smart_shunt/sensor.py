@@ -45,7 +45,6 @@ CONF_NUMBER_OF_FULL_DIS = "number_of_full_dis"
 CONF_NUMBER_OF_CHARGE_CYCLES = "number_of_charge_cycles"
 CONF_DISCHARGED_ENERGY = "discharged_energy"
 
-
 CONF_MAX_POWER_YESTERDAY = "max_power_yesterday"
 CONF_MAX_POWER_TODAY = "max_power_today"
 CONF_YIELD_TOTAL = "yield_total"
@@ -379,6 +378,10 @@ def to_code(config):
     if CONF_CONSUMED_AMP_HOURS in config:
         sens = yield sensor.new_sensor(config[CONF_CONSUMED_AMP_HOURS])
         cg.add(var.set_consumed_amp_hours_sensor(sens))
+
+    if CONF_BATTERY_TEMPERATURE in config:
+        sens = yield sensor.new_sensor(config[CONF_BATTERY_TEMPERATURE])
+        cg.add(var.set_battery_temperature_sensor(sens))
     # **************************** SS***************
     if CONF_BMV_ALARM_TEXT in config:
         conf = config[CONF_BMV_ALARM_TEXT]
