@@ -15,6 +15,7 @@ from esphome.const import (
     ICON_POWER,
     ICON_TIMELAPSE,
     UNIT_AMPERE,
+    UNIT_CELSIUS,
     UNIT_EMPTY,
     UNIT_MINUTE,
     UNIT_PERCENT,
