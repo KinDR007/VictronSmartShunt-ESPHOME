@@ -452,6 +452,12 @@ void VictronSmartShuntComponent::handle_value_() {
   } else if (label_ == "I") {
     if (battery_current_sensor_ != nullptr)
       battery_current_sensor_->publish_state(atoi(value_.c_str()) / 1000.0);  // NOLINT(cert-err34-c)
+  } else if (label_ == "T") {
+    if (value_ == "---") {
+      battery_temperature_sensor_->publish_state(NAN);
+    } else {
+      battery_temperature_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
+    }
   } else if (label_ == "IL") {
     if (load_current_sensor_ != nullptr)
       load_current_sensor_->publish_state(atoi(value_.c_str()) / 1000.0);  // NOLINT(cert-err34-c)
@@ -491,12 +497,6 @@ void VictronSmartShuntComponent::handle_value_() {
     // ESP_LOGD(TAG, "received PID: '%04x'", value);
     if ((pid_sensor_ != nullptr) && !pid_sensor_->has_state()) {
       pid_sensor_->publish_state(pid_text(value));
-    }
-  } else if (label_ == "T") {
-    if (value_ == "---") {
-      battery_temperature_sensor_->publish_state(NAN);
-    } else {
-      battery_temperature_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
     }
   } else {
     ESP_LOGD(TAG, "   ----> unhalted LABEL : '%s'  with value : '%s'", label_.c_str(), value_.c_str());
