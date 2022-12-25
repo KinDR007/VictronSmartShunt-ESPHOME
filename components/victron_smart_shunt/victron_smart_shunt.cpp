@@ -494,9 +494,9 @@ void VictronSmartShuntComponent::handle_value_() {
     }
   } else if (label_ == "T") {
     if (value_ == "---") {
-      this->publish_state_(battery_temperature_sensor_, NAN);
+      battery_temperature_sensor_->publish_state_(NAN);
     } else {
-      this->publish_state_(battery_temperature_sensor_, atoi(value_.c_str()));  // NOLINT(cert-err34-c)
+      battery_temperature_sensor_->publish_state_(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
     }
   }
   } else {
