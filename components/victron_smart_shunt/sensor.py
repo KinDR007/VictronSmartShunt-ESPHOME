@@ -44,7 +44,6 @@ CONF_DISCHARGED_ENERGY = "discharged_energy"
 CONF_NUMBER_OF_FULL_DIS = "number_of_full_dis"
 CONF_NUMBER_OF_CHARGE_CYCLES = "number_of_charge_cycles"
 CONF_DISCHARGED_ENERGY = "discharged_energy"
-
 CONF_MAX_POWER_YESTERDAY = "max_power_yesterday"
 CONF_MAX_POWER_TODAY = "max_power_today"
 CONF_YIELD_TOTAL = "yield_total"
@@ -53,13 +52,12 @@ CONF_YIELD_TODAY = "yield_today"
 CONF_PANEL_VOLTAGE = "panel_voltage"
 CONF_PANEL_POWER = "panel_power"
 CONF_BATTERY_CURRENT = "battery_current"
+CONF_BATTERY_TEMPERATURE = "battery_temperature"
 CONF_DAY_NUMBER = "day_number"
 CONF_CHARGER_STATUS = "charger_status"
 CONF_ERROR_CODE = "error_code"
 CONF_TRACKER_OPERATION = "tracker_operation"
 CONF_LOAD_CURRENT = "load_current"
-CONF_BATTERY_TEMPERATURE = "battery_temperature"
-
 CONF_CHARGER_TEXT = "charger_text"
 CONF_ERROR_TEXT = "error_text"
 CONF_ALARM_REASON_TEXT = "alarm_reason_text"
@@ -126,6 +124,13 @@ CONFIG_SCHEMA = cv.Schema(
             accuracy_decimals=3,
             device_class=DEVICE_CLASS_CURRENT,
         ),
+        cv.Optional(CONF_BATTERY_TEMPERATURE): sensor.sensor_schema(
+            unit_of_measurement=UNIT_CELSIUS,
+            icon=ICON_EMPTY,
+            accuracy_decimals=0,
+            device_class=DEVICE_CLASS_TEMPERATURE,
+            state_class=STATE_CLASS_MEASUREMENT,
+        ),
         cv.Optional(CONF_DAY_NUMBER): sensor.sensor_schema(
             unit_of_measurement=UNIT_EMPTY,
             icon=ICON_EMPTY,
@@ -155,13 +160,6 @@ CONFIG_SCHEMA = cv.Schema(
             icon=ICON_CURRENT_AC,
             accuracy_decimals=3,
             device_class=DEVICE_CLASS_CURRENT,
-        ),
-        cv.Optional(CONF_BATTERY_TEMPERATURE): sensor.sensor_schema(
-            unit_of_measurement=UNIT_CELSIUS,
-            icon=ICON_EMPTY,
-            accuracy_decimals=0,
-            device_class=DEVICE_CLASS_TEMPERATURE,
-            state_class=STATE_CLASS_MEASUREMENT,
         ),
         cv.Optional(CONF_CHARGER_TEXT): text_sensor.TEXT_SENSOR_SCHEMA.extend(
             {cv.GenerateID(): cv.declare_id(text_sensor.TextSensor)}
@@ -268,6 +266,7 @@ CONFIG_SCHEMA = cv.Schema(
     }
 )
 
+
 def to_code(config):
     var = yield cg.get_variable(config[CONF_VICTRON_SMART_SHUNT_ID])
 
@@ -306,6 +305,10 @@ def to_code(config):
     if CONF_BATTERY_CURRENT in config:
         sens = yield sensor.new_sensor(config[CONF_BATTERY_CURRENT])
         cg.add(var.set_battery_current_sensor(sens))
+
+    if CONF_BATTERY_TEMPERATURE in config:
+        sens = yield sensor.new_sensor(config[CONF_BATTERY_TEMPERATURE])
+        cg.add(var.set_battery_temperature_sensor(sens))
 
     if CONF_LOAD_CURRENT in config:
         sens = yield sensor.new_sensor(config[CONF_LOAD_CURRENT])
@@ -379,9 +382,6 @@ def to_code(config):
         sens = yield sensor.new_sensor(config[CONF_CONSUMED_AMP_HOURS])
         cg.add(var.set_consumed_amp_hours_sensor(sens))
 
-    if CONF_BATTERY_TEMPERATURE in config:
-        sens = yield sensor.new_sensor(config[CONF_BATTERY_TEMPERATURE])
-        cg.add(var.set_battery_temperature_sensor(sens))
     # **************************** SS***************
     if CONF_BMV_ALARM_TEXT in config:
         conf = config[CONF_BMV_ALARM_TEXT]
