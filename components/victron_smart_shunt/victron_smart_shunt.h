@@ -54,6 +54,9 @@ class VictronSmartShuntComponent : public uart::UARTDevice, public Component {
   void set_number_of_full_discharges_sensor(sensor::Sensor *number_of_full_discharges_sensor) {
     number_of_full_discharges_sensor_ = number_of_full_discharges_sensor;
   }
+  void set_battery_temperature_sensor(sensor::Sensor *battery_temperature_sensor) {
+    battery_temperature_sensor_ = battery_temperature_sensor;
+  }
   void set_last_full_charge_sensor(sensor::Sensor *last_full_charge_sensor) {
     last_full_charge_sensor_ = last_full_charge_sensor;
   }  // H9 sec Number of seconds since last full charge
@@ -132,6 +135,7 @@ class VictronSmartShuntComponent : public uart::UARTDevice, public Component {
   sensor::Sensor *amount_of_discharged_energy_sensor_{nullptr};
   sensor::Sensor *number_of_charge_cycles_sensor_{nullptr};
   sensor::Sensor *number_of_full_discharges_sensor_{nullptr};
+  sensor::Sensor *battery_temperature_sensor_{nullptr};
   text_sensor::TextSensor *bmv_alarm_sensor_{nullptr};
   text_sensor::TextSensor *bmv_alarm_reason_sensor_{nullptr};
   text_sensor::TextSensor *bmv_sensor_{nullptr};

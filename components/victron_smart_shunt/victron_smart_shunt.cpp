@@ -492,6 +492,13 @@ void VictronSmartShuntComponent::handle_value_() {
     if ((pid_sensor_ != nullptr) && !pid_sensor_->has_state()) {
       pid_sensor_->publish_state(pid_text(value));
     }
+  } else if (label_ == "T") {
+    if (value_ == "---") {
+      this->publish_state_(battery_temperature_sensor_, NAN);
+    } else {
+      this->publish_state_(battery_temperature_sensor_, atoi(value_.c_str()));  // NOLINT(cert-err34-c)
+    }
+  }
   } else {
     ESP_LOGD(TAG, "   ----> unhalted LABEL : '%s'  with value : '%s'", label_.c_str(), value_.c_str());
   }

@@ -56,6 +56,7 @@ CONF_CHARGER_STATUS = "charger_status"
 CONF_ERROR_CODE = "error_code"
 CONF_TRACKER_OPERATION = "tracker_operation"
 CONF_LOAD_CURRENT = "load_current"
+CONF_BATTERY_TEMPERATURE = "battery_temperature"
 
 CONF_CHARGER_TEXT = "charger_text"
 CONF_ERROR_TEXT = "error_text"
@@ -152,6 +153,13 @@ CONFIG_SCHEMA = cv.Schema(
             icon=ICON_CURRENT_AC,
             accuracy_decimals=3,
             device_class=DEVICE_CLASS_CURRENT,
+        ),
+        cv.Optional(CONF_BATTERY_TEMPERATURE): sensor.sensor_schema(
+            unit_of_measurement=UNIT_CELSIUS,
+            icon=ICON_EMPTY,
+            accuracy_decimals=0,
+            device_class=DEVICE_CLASS_TEMPERATURE,
+            state_class=STATE_CLASS_MEASUREMENT,
         ),
         cv.Optional(CONF_CHARGER_TEXT): text_sensor.TEXT_SENSOR_SCHEMA.extend(
             {cv.GenerateID(): cv.declare_id(text_sensor.TextSensor)}
@@ -257,7 +265,6 @@ CONFIG_SCHEMA = cv.Schema(
         ),
     }
 )
-
 
 def to_code(config):
     var = yield cg.get_variable(config[CONF_VICTRON_SMART_SHUNT_ID])
