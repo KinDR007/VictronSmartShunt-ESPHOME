@@ -498,7 +498,6 @@ void VictronSmartShuntComponent::handle_value_() {
     } else {
       battery_temperature_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
     }
-  }
   } else {
     ESP_LOGD(TAG, "   ----> unhalted LABEL : '%s'  with value : '%s'", label_.c_str(), value_.c_str());
   }
