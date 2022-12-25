@@ -381,7 +381,6 @@ def to_code(config):
     if CONF_CONSUMED_AMP_HOURS in config:
         sens = yield sensor.new_sensor(config[CONF_CONSUMED_AMP_HOURS])
         cg.add(var.set_consumed_amp_hours_sensor(sens))
-
     # **************************** SS***************
     if CONF_BMV_ALARM_TEXT in config:
         conf = config[CONF_BMV_ALARM_TEXT]
