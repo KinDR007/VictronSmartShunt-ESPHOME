@@ -90,6 +90,10 @@ sensor:
       id: bc
       accuracy_decimals: ${accuracy}
 
+    battery_temperature:
+      name: "Battery Temperature"
+      id: bt
+
     fw_version:
       name: "fw"
       id: fw
