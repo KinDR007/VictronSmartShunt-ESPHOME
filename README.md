@@ -1,3 +1,18 @@
+
+# Deprecated, please use the [Victron MPPT library](https://github.com/KinDR007/VictronMPPT-ESPHOME) which includes support for MPPT and Smartshunt or BMV.
+
+
+
+
+
+
+
+
+
+
+
+
+
 # VictronSmartShunt-ESPHOME
 ESPHome component to monitor a Victron BMV and SmartShunt via ve.direct / UART TTL
 
